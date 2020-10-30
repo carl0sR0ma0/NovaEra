@@ -12,7 +12,7 @@
       die("FALHA NA CONEXÃO <br>" . mysqli_connect_error());
     return $con;
   }
-
+  
   $conexao = conectar();
 
 ?>
