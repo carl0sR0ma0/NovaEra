@@ -25,6 +25,36 @@
   <?php include "../conexao.php"; ?>
 </head>
 <body>
-    
+  <div id="box_topo">
+    <div id="logo">
+      <a href="index.php"><img src="../img/logo-novaera.png" width="250"></a>
+    </div>
+  </div>
+
+  <div id="box_menu">
+    <div id="menu_topo">
+      <ul>
+        <img src="img/separador_menu.png" />
+        <li><a href="">CURSOS E DISCIPLINAS</a>
+          <ul>
+            <li><a href="cursos_e_disciplinas.php?pg=curso">Cadastrar Curso</a></li>
+            <li><a href="cursos_e_disciplinas.php?pg=disciplina">Cadastrar Disciplina</a></li>
+            <li><a href="cursos_e_disciplinas.php?pg=cursoedisciplina">Cursos & Disciplinas</a></li>
+          </ul>
+        </li>
+        <img src="img/separador_menu.png" />
+        <li><a href="professores.php?pg=todos">PROFESSORES</a></li>
+        <img src="img/separador_menu.png" />
+        <li><a href="estudantes.php?pg=todos">ESTUDANTES</a></li>
+        <img src="img/separador_menu.png" />
+        <li><a href="">RELATÓRIOS</a>
+          <ul>
+            <li><a href="">Alunos</a></li>
+            <li><a href="">Professores</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
 </body>
 </html>

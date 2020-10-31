@@ -1,0 +1,87 @@
+body {
+  padding: 0;
+  margin: 0;
+}
+
+#box_topo {
+  width: 900px;
+  height: 200px;
+  margin: 30px auto;
+}
+
+#logo {
+  width: 320px;
+  height: 200px;
+  float: left;
+  margin: -10px 0 0 0;
+}
+
+#box_menu {
+  width: auto;
+  background: url(../img/menu_topo.png) repeat;
+  height: 40px;
+  margin: -17px auto;
+}
+
+#menu_topo {
+  width: 980px;
+  height: 40px;
+  margin: auto;
+}
+
+#menu_topo ul {
+  list-style: none;
+}
+
+#menu_topo ul li {
+  float: left;
+  display: inline;
+}
+
+#menu_topo ul li a {
+  float: left;
+  color: #FFF;
+  font: 14px Arial, Helvetica, sans-serif;
+  margin: 0px 0 0 0;
+  padding: 10px 6px 10px 6px;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+#menu_topo ul li a:hover {
+  background-color: #900;
+}
+
+#menu_topo ul li .a {
+  margin: 0px 0 0 -38px;
+}
+
+#menu_topo img {
+  float: left;
+  margin: -0px 0 0 0;
+}
+
+#menu_topo li ul {
+  display: none;
+  position: absolute;
+  top: 296px;
+  width: 160px;
+}
+
+#menu_topo li:hover ul {
+  display: block;
+}
+
+#menu_topo li ul a {
+  width: 160px;
+  background: #800000;
+  text-transform: none;
+  padding: 10px 10px 10px 10px;
+  margin: -16px 0px 17px -40px;
+  border-radius: 3px;
+}
+
+#menu_topo li ul a:hover {
+  background: #930;
+  color: #FF0;
+}
