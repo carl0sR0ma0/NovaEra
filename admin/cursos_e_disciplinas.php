@@ -274,7 +274,8 @@
                       }
                     }
                   } else ?>
-                  <a href="cursos_e_disciplinas.php?pg=disciplina&func=disciplina_prof&id=<?php echo $res_busca['id']; ?>">Adicionar Professor</a>
+                  <a href="cursos_e_disciplinas.php?pg=disciplina&func=disciplina_prof&id=<?php echo $res_busca['id']; ?>"><img src="img/plus.png" title="Adicionar Professor" border="0"></a>
+                  <a href="cursos_e_disciplinas.php?pg=disciplina&func=disciplina_profrem&id=<?php echo $res_busca['id']; ?>"><img src="img/menos.png" title="Excluir Professor" border="0"></a>
               </h3></td>
               <td>
                 <a href="cursos_e_disciplinas.php?pg=disciplina&func=edita&id=<?php echo $res_busca['id']; ?>" class="a"><img src="../img/ico-editar.png" title="Editar Dados Cadastrais" width="18" height="18" border="0"></a>
@@ -381,6 +382,49 @@
                 </tr>
                 <tr>
                   <td><input type="submit" name="button" class="input" value="Adicionar"></td>
+                </tr>
+              </table>
+          </form>
+          <br>
+      <?php } ?>
+      <!-- FUNCAO REMOVER PROFESSOR Á DISCIPLINA -->
+      <?php if (@$_GET['func'] == 'disciplina_profrem') { ?>
+        <hr>
+        <h1>Remover Professor à Disciplina</h1>
+
+        <?php
+          if (isset($_POST['button'])) {
+            $id = $_GET['id'];
+            $idProfessor = $_POST['professor'];
+            $sql_cad_prof_disc = "DELETE FROM professor_disciplina WHERE id_professor = '$idProfessor' AND id_disciplina = '$id'";
+            $cad_disc_prof = mysqli_query($conexao, $sql_cad_prof_disc);
+
+            if ($cad_disc_prof == '')
+              echo "<script language='javascript'>window.alert('Ocorreu um erro tente novamente!');window.location='';</script>";
+            else
+              echo "<script language='javascript'>window.alert('Remoção realizada com sucesso!');window.location='cursos_e_disciplinas.php?pg=disciplina';</script>";
+          }
+        ?>
+        <form action="" method="post" name="form1" enctype="multipart/form-data">
+              <table width="900" border="0">
+                <tr>
+                  <td>Selecione o Professor:</td>
+                </tr>
+                <tr>
+                  <td>
+                    <select name="professor">
+                    <?php
+                      $sql_result_prof = "SELECT * FROM professor WHERE nome != ''";
+                      $result_rec_prof = mysqli_query($conexao, $sql_result_prof);
+
+                      while ($r3 = mysqli_fetch_assoc($result_rec_prof)) { ?>
+                        <option value="<?php echo $r3['id']; ?>"><?php echo $r3['nome']; ?></option>
+                      <?php } ?>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td><input type="submit" name="button" class="input" value="Remover"></td>
                 </tr>
               </table>
           </form>
