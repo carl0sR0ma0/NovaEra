@@ -43,15 +43,7 @@
           </ul>
         </li>
         <img src="img/separador_menu.png" />
-<<<<<<< HEAD
         <li><a href="">TURMAS</a>
-=======
-        <li><a href="professores.php?pg=todos">PROFESSORES</a></li>
-        <img src="img/separador_menu.png" />
-        <li><a href="aluno.php?pg=todos">ALUNOS</a></li>
-        <img src="img/separador_menu.png" />
-        <li><a href="">RELATÓRIOS</a>
->>>>>>> 766dbf4 (Implementando o Módulo Aluno)
           <ul>
             <li><a href="">Nova Turma</a></li>
             <li><a href="">Adicionar Aluno</a></li>
