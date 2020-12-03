@@ -435,7 +435,7 @@
   <!-- MOSTRAR OS CURSOS E AS DISCIPLINAS -->
   <?php if (@$_GET['pg'] == 'cursoedisciplinas') { ?>
     <div id="box_curso_e_disciplinas">
-      <h1>Cursos e Disciplinas</h1>
+      <h1>Cursos e Disciplinas</h1>      
       <?php
         $sql_ced = "SELECT * FROM curso";
         $result_ced = mysqli_query($conexao, $sql_ced);

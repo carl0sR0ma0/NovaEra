@@ -46,7 +46,7 @@
         <li><a href="turma.php?pg=todos">TURMAS</a>
           <ul>
             <li><a href="turma.php?pg=cadastra&bloco=1">Nova Turma</a></li>
-            <li><a href="">Adicionar Aluno</a></li>
+            <li><a href="turma.php?pg=listaralunosturma">Listar Alunos</a></li>
           </ul>
         </li>
         <img src="img/separador_menu.png" />
