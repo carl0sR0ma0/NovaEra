@@ -89,7 +89,10 @@
                 $result2 = mysqli_query($conexao, $sql_2);
                 echo mysqli_num_rows($result2); ?>
               </h3></td>
-              <td><a href="cursos_e_disciplinas.php?pg=curso&deleta=cur&id=<?php echo @$res_1['id']; ?>"><img src="img/deleta.jpg" title="Excluir curso" width="18" height="18" border="0"></a></td>
+              <td>
+                <a href="cursos_e_disciplinas.php?pg=curso&func=edita&id=<?php echo $res_1['id']; ?>" class="a"><img src="../img/ico-editar.png" title="Editar Dados Cadastrais" width="18" height="18" border="0"></a>
+                <a href="cursos_e_disciplinas.php?pg=curso&deleta=cur&id=<?php echo @$res_1['id']; ?>"><img src="img/deleta.jpg" title="Excluir curso" width="18" height="18" border="0"></a>
+              </td>
             </tr>
             <?php } ?>
           </table>
@@ -105,8 +108,67 @@
             echo "<script language='javascript'>window.location='cursos_e_disciplinas.php?pg=curso';</script>";
           }
         ?>
-    </div>
-  <?php } ?>
+        <!-- EDITAR OS CURSO --->
+        <?php if (@$_GET['func'] == 'edita') { ?>
+          <hr>
+          <h1>Editar professores</h1>
+
+          <?php
+            $id = $_GET['id'];
+
+            $sql_1 = "SELECT * FROM curso WHERE id = '$id'";
+            $edit = mysqli_query($conexao, $sql_1);
+            while ($res_1 = mysqli_fetch_assoc($edit)) { ?>
+              <?php
+                if (isset($_POST['button'])) {
+                  $id = $_GET['id'];
+                  $nome = $_POST['nome'];
+                  $periodo = $_POST['periodicidade'];
+                  $descricao = $_POST['descricao'];
+
+                  $sql_2 = "UPDATE curso SET nome = '$nome', periodicidade = '$periodo', descricao = '$descricao' WHERE id = '$id'";
+                  $res_editar = mysqli_query($conexao, $sql_2);
+                  if ($res_editar == '')
+                    echo "<script language='javascript'>window.alert('Ocorreu um erro tente novamente!');window.location='';</script>";
+                  else
+                    echo "<script language='javascript'>window.alert('Atualização realizada com sucesso!');window.location='cursos_e_disciplinas.php?pg=curso';</script>";
+                }
+              ?>
+              <form action="" method="post" name="form1" enctype="multipart/form-data">
+                <table width="900" border="0">
+                  <tr>
+                    <td>Nome:</td>
+                    <td>Periodicidade:</td>
+                  </tr>
+                  <tr>
+                    <td><input type="text" name="nome" id="textfield2" value="<?php echo $res_1['nome']; ?>"></td>
+                    <td>
+                      <select name="periodicidade" id="periodicidade" size="1">
+                        <option value=""><?php echo $res_1['periodicidade']; ?></option>
+                        <option value=""></option>
+                        <option value="Manhã">Manhã</option>
+                        <option value="Tarde">Tarde</option>
+                        <option value="Noite">Noite</option>
+                      </select>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Descrição:</td>
+                  </tr>
+                  <tr>
+                    <td><textarea name="descricao" id="textarea" cols="35" rows="5"><?php echo $res_1['descricao']; ?></textarea></td>
+                  </tr>
+                  <tr>
+                    <td><input type="submit" name="button" class="input" value="Atualizar"></td>
+                  </tr>
+                </table>
+            <?php } ?>
+              </form>
+        <?php } ?>
+        <br>
+    </div> <!-- Fechamento da div box_curso -->
+  <?php } ?> <!-- Fechamento da pg = currso -->
+  
   <?php require "footer.php"; ?>
 </body>
 </html>
