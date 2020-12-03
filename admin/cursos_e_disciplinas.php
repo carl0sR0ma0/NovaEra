@@ -268,9 +268,9 @@
                     $professorId = $res_busca_prof['id'];
                     $sql_busca_prof = "SELECT * FROM professor_disciplina WHERE id_professor = '$professorId' AND id_disciplina = '$idDisc'";
                     $resul_buscar_prof = mysqli_query($conexao, $sql_busca_prof);
-                    if (mysqli_num_rows($resul_buscar_prof) <= 0) {
-                      echo "<a href='cursos_e_disciplinas.php?pg=disciplina_prof&disciplina=$idDisc'>Adicionar Professor</a>";
-                    } else {
+                    if (mysqli_num_rows($resul_buscar_prof) <= 0) { ?>
+                      <a href="cursos_e_disciplinas.php?pg=disciplina&func=disciplina_prof&id=<?php echo $res_busca['id']; ?>">Adicionar Professor</a>
+                    <?php } else {
                       while ($res_busca2 = mysqli_fetch_assoc($resul_buscar_prof)) {
                         echo " - " .$res_busca_prof['nome'] ;
                       }  
@@ -299,7 +299,7 @@
           echo "<script language='javascript'>window.location='cursos_e_disciplinas.php?pg=disciplina';</script>";
         }
       ?>
-      <!-- EDITAR OS CURSO --->
+      <!-- EDITAR AS DISCIPLINAS --->
       <?php if (@$_GET['func'] == 'edita') { ?>
         <hr>
         <h1>Editar Disciplina</h1>
@@ -344,7 +344,48 @@
               </table>
           <?php } ?> 
             </form>
-          
+      <?php } ?> <!-- Fechamento da função = edita -->
+      <!-- FUNCAO ADICIONAR PROFESSOR Á DISCIPLINA -->
+      <?php if (@$_GET['func'] == 'disciplina_prof') { ?>
+        <hr>
+        <h1>Adicionar Professor à Disciplina</h1>
+
+        <?php
+          if (isset($_POST['button'])) {
+            $id = $_GET['id'];
+            $idProfessor = $_POST['professor'];
+            $sql_cad_prof_disc = "INSERT INTO professor_disciplina (id_professor, id_disciplina) VALUES ('$idProfessor', '$id')";
+            $cad_disc_prof = mysqli_query($conexao, $sql_cad_prof_disc);
+
+            if ($cad_disc_prof == '')
+              echo "<script language='javascript'>window.alert('Ocorreu um erro tente novamente!');window.location='';</script>";
+            else
+              echo "<script language='javascript'>window.alert('Adição realizada com sucesso!');window.location='cursos_e_disciplinas.php?pg=disciplina';</script>";
+          }
+        ?>
+        <form action="" method="post" name="form1" enctype="multipart/form-data">
+              <table width="900" border="0">
+                <tr>
+                  <td>Selecione o Professor:</td>
+                </tr>
+                <tr>
+                  <td>
+                    <select name="professor">
+                    <?php
+                      $sql_result_prof = "SELECT * FROM professor WHERE nome != ''";
+                      $result_rec_prof = mysqli_query($conexao, $sql_result_prof);
+
+                      while ($r3 = mysqli_fetch_assoc($result_rec_prof)) { ?>
+                        <option value="<?php echo $r3['id']; ?>"><?php echo $r3['nome']; ?></option>
+                      <?php } ?>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td><input type="submit" name="button" class="input" value="Adicionar"></td>
+                </tr>
+              </table>
+          </form>
       <?php } ?>
     </div> <!-- Fechamento da div box_disciplina -->
   <?php } ?> <!-- Fechamento da pg = disciplina -->
