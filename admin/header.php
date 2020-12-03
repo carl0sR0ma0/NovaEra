@@ -43,6 +43,10 @@
           </ul>
         </li>
         <img src="img/separador_menu.png" />
+        <li><a href="professores.php?pg=todos">PROFESSORES</a></li>
+        <img src="img/separador_menu.png" />
+        <li><a href="aluno.php?pg=todos">ALUNOS</a></li>
+        <img src="img/separador_menu.png" />
         <li><a href="">TURMAS</a>
           <ul>
             <li><a href="">Nova Turma</a></li>
