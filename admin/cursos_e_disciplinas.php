@@ -272,16 +272,15 @@
                       echo "<a href='cursos_e_disciplinas.php?pg=disciplina_prof&disciplina=$idDisc'>Adicionar Professor</a>";
                     } else {
                       while ($res_busca2 = mysqli_fetch_assoc($resul_buscar_prof)) {
-                        echo $res_busca_prof['nome'];
+                        echo " - " .$res_busca_prof['nome'] ;
                       }  
                     }
                   }
                 ?>
               </h3></td>
               <td>
-                <a href="cursos_e_disciplinas.php?pg=disciplina&func=edita&id=<?php echo $res_1['id']; ?>" class="a"><img src="../img/ico-editar.png" title="Editar Dados Cadastrais" width="18" height="18" border="0"></a>
-                <td><a href="cursos_e_disciplinas.php?pg=disciplina&deleta=sim&id=<?php echo $res_busca['id']; ?>"><img src="img/deleta.jpg" title="Excluir Disciplina" width="18" height="18" border="0"></a></td>
-          </tr>
+                <a href="cursos_e_disciplinas.php?pg=disciplina&func=edita&id=<?php echo $res_busca['id']; ?>" class="a"><img src="../img/ico-editar.png" title="Editar Dados Cadastrais" width="18" height="18" border="0"></a>
+                <a href="cursos_e_disciplinas.php?pg=disciplina&deleta=sim&id=<?php echo $res_busca['id']; ?>"><img src="img/deleta.jpg" title="Excluir Disciplina" width="18" height="18" border="0"></a>
               </td>
             </tr>
             <?php } ?>
@@ -300,6 +299,53 @@
           echo "<script language='javascript'>window.location='cursos_e_disciplinas.php?pg=disciplina';</script>";
         }
       ?>
+      <!-- EDITAR OS CURSO --->
+      <?php if (@$_GET['func'] == 'edita') { ?>
+        <hr>
+        <h1>Editar Disciplina</h1>
+
+        <?php
+          $id = $_GET['id'];
+          $sql_4 = "SELECT * FROM disciplina WHERE id = '$id'";
+          $edit2 = mysqli_query($conexao, $sql_4);
+          while ($res_2 = mysqli_fetch_assoc($edit2)) { ?>
+            <?php
+              if (isset($_POST['button'])) {
+                $id = $_GET['id'];
+                $nome = $_POST['nome'];
+                $ch = $_POST['ch'];
+                $ementa = $_POST['ementa'];
+
+                $sql_5 = "UPDATE disciplina SET nome = '$nome', carga_horaria = '$ch', ementa = '$ementa' WHERE id = '$id'";
+                $res_edit2 = mysqli_query($conexao, $sql_5);
+                if ($res_edit2 == '')
+                  echo "<script language='javascript'>window.alert('Ocorreu um erro tente novamente!');window.location='';</script>";
+                else
+                  echo "<script language='javascript'>window.alert('Atualização realizada com sucesso!');window.location='cursos_e_disciplinas.php?pg=disciplina';</script>";
+              }
+            ?>
+            <form action="" method="post" name="form1" enctype="multipart/form-data">
+              <table width="900" border="0">
+                <tr>
+                  <td>Nome:</td>
+                  <td>Carga Horária:</td>
+                </tr>
+                <tr>
+                  <td><input type="text" name="nome" id="textfield" value="<?php echo $res_2['nome']; ?>"></td>
+                  <td><input type="text" name="ch" id="textfield" value="<?php echo $res_2['carga_horaria']; ?>"></td>
+                </tr>
+                <tr>
+                  <td>Ementa:</td>
+                </tr>
+                <tr>
+                  <td><textarea name="ementa" id="textarea" cols="35" rows="5"><?php echo $res_2['ementa']; ?></textarea></td>
+                  <td><input type="submit" name="button" class="input" value="Atualizar"></td>
+                </tr>
+              </table>
+          <?php } ?> 
+            </form>
+          
+      <?php } ?>
     </div> <!-- Fechamento da div box_disciplina -->
   <?php } ?> <!-- Fechamento da pg = disciplina -->
   <?php require "footer.php"; ?>
