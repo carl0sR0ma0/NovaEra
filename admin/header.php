@@ -39,14 +39,14 @@
           <ul>
             <li><a href="cursos_e_disciplinas.php?pg=curso">Cadastrar Curso</a></li>
             <li><a href="cursos_e_disciplinas.php?pg=disciplina">Cadastrar Disciplina</a></li>
-            <li><a href="cursos_e_disciplinas.php?pg=cursoedisciplina">Cursos & Disciplinas</a></li>
+            <li><a href="cursos_e_disciplinas.php?pg=cursoedisciplinas">Cursos & Disciplinas</a></li>
           </ul>
         </li>
         <img src="img/separador_menu.png" />
         <li><a href="turma.php?pg=todos">TURMAS</a>
           <ul>
             <li><a href="turma.php?pg=cadastra&bloco=1">Nova Turma</a></li>
-            <li><a href="">Adicionar Aluno</a></li>
+            <li><a href="turma.php?pg=listaralunosturma">Listar Alunos</a></li>
           </ul>
         </li>
         <img src="img/separador_menu.png" />
