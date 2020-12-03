@@ -43,13 +43,9 @@
           </ul>
         </li>
         <img src="img/separador_menu.png" />
-        <li><a href="professores.php?pg=todos">PROFESSORES</a></li>
-        <img src="img/separador_menu.png" />
-        <li><a href="aluno.php?pg=todos">ALUNOS</a></li>
-        <img src="img/separador_menu.png" />
-        <li><a href="">TURMAS</a>
+        <li><a href="turma.php?pg=todos">TURMAS</a>
           <ul>
-            <li><a href="">Nova Turma</a></li>
+            <li><a href="turma.php?pg=cadastra&bloco=1">Nova Turma</a></li>
             <li><a href="">Adicionar Aluno</a></li>
           </ul>
         </li>
