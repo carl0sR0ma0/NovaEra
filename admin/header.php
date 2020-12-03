@@ -45,7 +45,7 @@
         <img src="img/separador_menu.png" />
         <li><a href="professores.php?pg=todos">PROFESSORES</a></li>
         <img src="img/separador_menu.png" />
-        <li><a href="estudantes.php?pg=todos">ESTUDANTES</a></li>
+        <li><a href="aluno.php?pg=todos">ALUNOS</a></li>
         <img src="img/separador_menu.png" />
         <li><a href="">RELATÓRIOS</a>
           <ul>
