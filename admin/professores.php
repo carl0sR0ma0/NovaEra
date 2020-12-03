@@ -57,17 +57,98 @@
       <?php
         if (@$_GET['func'] == 'deleta') {
           $id = $_GET['id'];
-          $sql_41 = "DELETE FROM professor_disciplina WHERE id_professor = '$id'";
           $sql_42 = "DELETE FROM professor WHERE id = '$id'";
 
-          mysqli_query($conexao, $sql_41);
           mysqli_query($conexao, $sql_42);
           echo "<script language='javascript'>window.location='professores.php?pg=todos';</script>";
         }
       ?>
+      <!-- EDITAR O PROFESSOR -->
+      <?php if (@$_GET['func'] == 'edita') { ?>
+        <hr>
+        <h1>Editar Professor</h1>
+
+        <?php
+          $id = $_GET['id'];
+          $sql_1 = "SELECT * FROM professor WHERE id = '$id'";
+          $edit = mysqli_query($conexao, $sql_1);
+          
+          while ($res_1 = mysqli_fetch_assoc($edit)) { ?>
+            <?php if (isset($_POST['button'])) {
+              $id = $_GET['id'];
+              $nome = $_POST['nome'];
+              $titulacao = $_POST['titulacao'];
+
+              $sql_2 = "UPDATE professor SET nome = '$nome', titulacao = '$titulacao' WHERE id = '$id'";
+              $res_editar = mysqli_query($conexao, $sql_2);
+              if ($res_editar == '')
+                echo "<script language='javascript'>window.alert('Ocorreu um erro tente novamente!');window.location='';</script>";
+              else
+                echo "<script language='javascript'>window.alert('Atualização realizada com sucesso!');window.location='professores.php?pg=todos';</script>";
+            }
+          ?>
+          <form action="" method="post" name="form1" enctype="multipart/form-data">
+            <table width="900" border="0">
+              <tr>
+                <td>Nome:</td>
+                <td>Titulação:</td>
+              </tr>
+              <tr>
+                <td><input type="text" name="nome" id="textfield" value="<?php echo $res_1['nome']; ?>"></td>
+                <td><input type="text" name="titulacao" id="textfield" value="<?php echo $res_1['titulacao']; ?>"></td>
+              </tr>
+              <tr>
+                <td><input type="submit" name="button" id="button" class="input" value="Atualizar"></td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+              </tr>
+            </table>
+            <?php } ?>
+          </form>
+      <?php } ?>
+      <br>
     </div> <!-- Fechamento da div box_professores -->
   <?php } ?> <!-- Fechamento da PG todos -->
+  <!-- CADASTRO DOS PROFESSORES -->
+  <?php if (@$_GET['pg'] == 'cadastra') { ?>
+    <div id="cadastra_professores">
+      <h1>Cadastrar Novo Professor</h1>
+      <?php
+        if (isset($_POST['button'])) {
+          $id = $_POST['id'];
+          $nome = $_POST['nome'];
+          $titulacao = $_POST['titulacao'];
+
+          $sql_2 = "INSERT INTO professor (id, nome, titulacao) VALUES ('$id', '$nome', '$titulacao')";
+          $cadastra = mysqli_query($conexao, $sql_2);
+          if ($cadastra == '')
+            echo "<script language='javascript'>window.alert('Ocorreu um erro ao cadastrar');</script>";
+          else 
+            echo "<script language='javascript'>window.alert('Professor cadastrado com Sucesso!!!');window.location='professores.php?pg=todos';</script>";
+        }
+      ?>
+      <form action="" method="post">
+        <table width="900" border="0">
+          <tr>
+            <td>Id:</td>
+            <td>Nome:</td>
+            <td>Titulação:</td>
+          </tr>
+          <tr>
+            <td><input type="text" name="id" id="textfield"></td>
+            <td><input type="text" name="nome" id="textfield"></td>
+            <td><input type="text" name="titulacao" id="textfield"></td>
+          </tr>
+          <tr>
+            <td><input type="submit" value="Cadastrar" class="input" name="button"></td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+        </table>
+      </form>
+      <br>
     </div> <!-- FECHAMENTO DA DIV cadastra_professores -->
+  <?php } ?>
   <?php require "footer.php"; ?>
 </body>
 </html>
