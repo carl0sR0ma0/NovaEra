@@ -264,19 +264,17 @@
                   $sql_buscar_prof = "SELECT * FROM professor";                  
                   $result_buscar_prof = mysqli_query($conexao, $sql_buscar_prof);
                   
-                  while ($res_busca_prof = mysqli_fetch_assoc($result_buscar_prof)) {
-                    $professorId = $res_busca_prof['id'];
-                    $sql_busca_prof = "SELECT * FROM professor_disciplina WHERE id_professor = '$professorId' AND id_disciplina = '$idDisc'";
-                    $resul_buscar_prof = mysqli_query($conexao, $sql_busca_prof);
-                    if (mysqli_num_rows($resul_buscar_prof) <= 0) { ?>
-                      <a href="cursos_e_disciplinas.php?pg=disciplina&func=disciplina_prof&id=<?php echo $res_busca['id']; ?>">Adicionar Professor</a>
-                    <?php } else {
+                  if (mysqli_num_rows($result_buscar_prof) > 0) {
+                    while ($res_busca_prof = mysqli_fetch_assoc($result_buscar_prof)) {
+                      $professorId = $res_busca_prof['id'];
+                      $sql_busca_prof = "SELECT * FROM professor_disciplina WHERE id_professor = '$professorId' AND id_disciplina = '$idDisc'";
+                      $resul_buscar_prof = mysqli_query($conexao, $sql_busca_prof);
                       while ($res_busca2 = mysqli_fetch_assoc($resul_buscar_prof)) {
                         echo " - " .$res_busca_prof['nome'] ;
-                      }  
+                      }
                     }
-                  }
-                ?>
+                  } else ?>
+                  <a href="cursos_e_disciplinas.php?pg=disciplina&func=disciplina_prof&id=<?php echo $res_busca['id']; ?>">Adicionar Professor</a>
               </h3></td>
               <td>
                 <a href="cursos_e_disciplinas.php?pg=disciplina&func=edita&id=<?php echo $res_busca['id']; ?>" class="a"><img src="../img/ico-editar.png" title="Editar Dados Cadastrais" width="18" height="18" border="0"></a>
@@ -386,6 +384,7 @@
                 </tr>
               </table>
           </form>
+          <br>
       <?php } ?>
     </div> <!-- Fechamento da div box_disciplina -->
   <?php } ?> <!-- Fechamento da pg = disciplina -->
