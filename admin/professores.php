@@ -46,20 +46,25 @@
               <td></td>
               <td>
                 <a href="professores.php?pg=todos&func=deleta&id=<?php echo $res_1['id']; ?>" class="a"><img src="img/deleta.jpg" title="Excluir Professor" width="18" height="18" border="0"></a>
-                <?php if ($res_1['status'] == 'Inativo') { ?>
-                  <a href="professores.php?pg=todos&func=ativa&id=<?php echo $res_1['id']; ?>&code=<?php echo $res_1['code']; ?>" class="a"><img src="../img/correto.jpg" title="Ativar novamente professor" width="20" height="20" border="0"></a>
-                <?php } ?>
-                <?php if ($res_1['status'] == 'Ativo') { ?>
-                  <a href="professores.php?pg=todos&func=inativa&id=<?php echo $res_1['id']; ?>&code=<?php echo $res_1['code']; ?>" class="a"><img src="../img/ico_bloqueado.png" title="Inativar Professor(a)" width="18" height="18" border="0"></a>
-                <?php } ?>
                 <a href="professores.php?pg=todos&func=edita&id=<?php echo $res_1['id']; ?>" class="a"><img src="../img/ico-editar.png" title="Editar Dados Cadastrais" width="18" height="18" border="0"></a>
-                <a href="historico_professor.php?id=<?php echo $res_1['id']; ?>" class="a" rel="superbox[iframe][930x500]"><img src="../img/visualizar16.gif" title="Histórico deste professor" width="18" height="18" border="0"></a>
               </td>
             </tr>
             <?php } ?>
           </table>
         <?php } ?>
-        
+      <br>
+      <!-- DELETAR O PROFESSOR -->
+      <?php
+        if (@$_GET['func'] == 'deleta') {
+          $id = $_GET['id'];
+          $sql_41 = "DELETE FROM professor_disciplina WHERE id_professor = '$id'";
+          $sql_42 = "DELETE FROM professor WHERE id = '$id'";
+
+          mysqli_query($conexao, $sql_41);
+          mysqli_query($conexao, $sql_42);
+          echo "<script language='javascript'>window.location='professores.php?pg=todos';</script>";
+        }
+      ?>
     </div> <!-- Fechamento da div box_professores -->
   <?php } ?> <!-- Fechamento da PG todos -->
     </div> <!-- FECHAMENTO DA DIV cadastra_professores -->
