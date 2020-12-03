@@ -167,8 +167,141 @@
         <?php } ?>
         <br>
     </div> <!-- Fechamento da div box_curso -->
-  <?php } ?> <!-- Fechamento da pg = currso -->
-  
+  <?php } ?> <!-- Fechamento da pg = curso -->
+
+  <!--CADASTRAR DISCIPLINAS -->
+  <?php if (@$_GET['pg'] == 'disciplina') { ?>
+    <div id="box_disciplinas">
+      <br><br>
+      <a class="a2" href="cursos_e_disciplinas.php?pg=disciplina&cadastra=sim">Cadastrar Disciplina</a>
+      <?php if (@$_GET['cadastra'] == 'sim') { ?>
+        <br><br>
+        <h1>Cadastrar Nova Disciplina</h1>
+        <?php
+          if (isset($_POST['cadastra'])) {
+            $id = $_POST['id'];
+            $curso = $_POST['curso'];
+            $nome = $_POST['nome'];
+            $ch = $_POST['ch'];
+            $ementa = $_POST['ementa'];
+
+            if ($nome == '')
+              echo "<script language='javascript'>window.alert('Digite o nome da disciplina');</script>";
+            elseif ($ch == '')
+              echo "<script language='javascript'>window.alert('Digite a carga horária da disciplina');</script>";
+            else {
+              $sql_cad_disc = "INSERT INTO disciplina (id, nome, carga_horaria, ementa, id_curso) VALUES ('$id', '$nome', '$ch', '$ementa', '$curso')";
+              $cad_disc = mysqli_query($conexao, $sql_cad_disc);
+              if ($cad_disc == '')
+                echo "<script language='javascript'>window.alert('Ocorreu um erro!');</script>";
+              else
+                echo "<script language='javascript'>window.alert('Disciplina cadastrada com sucesso!!!');window.location='cursos_e_disciplinas.php?pg=disciplina';</script>";
+            }
+          }
+        ?>
+        <form action="" method="post" name="form1">
+          <table width="900" border="0">
+            <tr>
+              <td>Curso:</td>
+              <td>Id:</td>
+              <td>Disciplina:</td>
+            </tr>
+            <tr>
+              <td>
+                <select style="width:200px;" size="1" name="curso">
+                    <?php
+                      $sql_rec_curso = "SELECT * FROM curso";
+                      $result_rec_curso = mysqli_query($conexao, $sql_rec_curso);
+
+                      while ($r2 = mysqli_fetch_assoc($result_rec_curso)) { ?>
+                        <option value="<?php echo $r2['id']; ?>"><?php echo $r2['nome']; ?></option>
+                      <?php } ?>
+                  </select>
+              </td>
+              <td><input type="text" name="id"></td>
+              <td><input type="text" name="nome" id="textfield"></td>
+            </tr>
+            <tr>
+              <td>Carga-Horária</td>
+              <td>Ementa:</td>
+              <td>&nbsp;</td>
+              <td width="0" colspan="2"></td>
+            </tr>
+            <tr>
+              <td><input type="text" name="ch" id="textfield"></td>
+              <td><textarea name="ementa" id="textarea" cols="35" rows="5"></textarea></td>
+              <td><input class="input" type="submit" name="cadastra" id="button" value="Cadastrar"></td>
+            </tr>
+          </table>
+        </form>
+        <br>
+      <?php die; } ?>
+      <!-- VISUALIZAR DISCIPLINAS CADASTRADAS -->
+      <br><br>
+      <h1>Disciplinas</h1>
+      <?php
+        $sql_buscar_disc = "SELECT * FROM disciplina";
+        $result_buscar_disc = mysqli_query($conexao, $sql_buscar_disc);
+        if (mysqli_num_rows($result_buscar_disc) == '')
+          echo "<h2>No momento não existe nenhuma Disciplina cadastrada!!!</h2><br><br>";
+        else { ?>
+          <table width="900" border=0>
+            <tr>
+              <td><strong>Curso:</strong></td>
+              <td><strong>Id:</strong></td>
+              <td><strong>Disciplina:</strong></td>
+              <td><strong>Carga-Horária:</strong></td>
+              <td><strong>Professor:</strong></td>
+            </tr>
+            <?php while ($res_busca = mysqli_fetch_assoc($result_buscar_disc)) { ?>
+            <tr>
+              <td><h3><?php echo $res_busca['id_curso']; ?></h3></td>
+              <td><h3><?php echo $idDisc = $res_busca['id']; ?></h3></td>
+              <td><h3><?php echo $res_busca['nome']; ?></h3></td>
+              <td><h3><?php echo $res_busca['carga_horaria']; ?></h3></td>
+              <td><h3>
+                <?php
+                  $sql_buscar_prof = "SELECT * FROM professor";                  
+                  $result_buscar_prof = mysqli_query($conexao, $sql_buscar_prof);
+                  
+                  while ($res_busca_prof = mysqli_fetch_assoc($result_buscar_prof)) {
+                    $professorId = $res_busca_prof['id'];
+                    $sql_busca_prof = "SELECT * FROM professor_disciplina WHERE id_professor = '$professorId' AND id_disciplina = '$idDisc'";
+                    $resul_buscar_prof = mysqli_query($conexao, $sql_busca_prof);
+                    if (mysqli_num_rows($resul_buscar_prof) <= 0) {
+                      echo "<a href='cursos_e_disciplinas.php?pg=disciplina_prof&disciplina=$idDisc'>Adicionar Professor</a>";
+                    } else {
+                      while ($res_busca2 = mysqli_fetch_assoc($resul_buscar_prof)) {
+                        echo $res_busca_prof['nome'];
+                      }  
+                    }
+                  }
+                ?>
+              </h3></td>
+              <td>
+                <a href="cursos_e_disciplinas.php?pg=disciplina&func=edita&id=<?php echo $res_1['id']; ?>" class="a"><img src="../img/ico-editar.png" title="Editar Dados Cadastrais" width="18" height="18" border="0"></a>
+                <td><a href="cursos_e_disciplinas.php?pg=disciplina&deleta=sim&id=<?php echo $res_busca['id']; ?>"><img src="img/deleta.jpg" title="Excluir Disciplina" width="18" height="18" border="0"></a></td>
+          </tr>
+              </td>
+            </tr>
+            <?php } ?>
+          </table>
+          <br>
+        <?php } ?>
+      <!-- EXCLUSÃO DAS DISCIPLINAS -->
+      <?php
+        if (@$_GET['deleta'] == 'sim') {
+          $id = $_GET['id'];
+          $sql_31 = "DELETE FROM professor_disciplina WHERE id_disciplina = '$id'";
+          $sql_32 = "DELETE FROM disciplina WHERE id = '$id'";
+
+          mysqli_query($conexao, $sql_31);
+          mysqli_query($conexao, $sql_32);
+          echo "<script language='javascript'>window.location='cursos_e_disciplinas.php?pg=disciplina';</script>";
+        }
+      ?>
+    </div> <!-- Fechamento da div box_disciplina -->
+  <?php } ?> <!-- Fechamento da pg = disciplina -->
   <?php require "footer.php"; ?>
 </body>
 </html>
