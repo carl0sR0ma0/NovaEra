@@ -36,7 +36,7 @@
               <td><h3><?php echo $res_1['id_turma']; ?></h3></td>
               <td></td>
               <td>
-                <a class="a" href="aluno.php?pg=todos&func=deleta&id=<?php echo $res_1['id']; ?>&id=<?php echo $res_1['id']; ?>"><img src="img/deleta.jpg" title="Excluir Aluno(a)" width="18" height="20" border="0"></a>
+                <a class="a" href="aluno.php?pg=todos&func=deleta&id=<?php echo $res_1['id']; ?>"><img src="img/deleta.jpg" title="Excluir Aluno(a)" width="18" height="20" border="0"></a>
               </td>
             </tr>    
             <?php } ?>
