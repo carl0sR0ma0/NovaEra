@@ -43,16 +43,17 @@
           </ul>
         </li>
         <img src="img/separador_menu.png" />
-        <li><a href="professores.php?pg=todos">PROFESSORES</a></li>
-        <img src="img/separador_menu.png" />
-        <li><a href="estudantes.php?pg=todos">ESTUDANTES</a></li>
-        <img src="img/separador_menu.png" />
-        <li><a href="">RELATÓRIOS</a>
+        <li><a href="">TURMAS</a>
           <ul>
-            <li><a href="">Alunos</a></li>
-            <li><a href="">Professores</a></li>
+            <li><a href="">Nova Turma</a></li>
+            <li><a href="">Adicionar Aluno</a></li>
           </ul>
         </li>
+        <img src="img/separador_menu.png" />
+        <li><a href="professores.php?pg=todos">PROFESSORES</a></li>
+        <img src="img/separador_menu.png" />
+        <li><a href="estudantes.php?pg=todos">ALUNOS</a></li>
+        <img src="img/separador_menu.png" />
       </ul>
     </div>
   </div>
