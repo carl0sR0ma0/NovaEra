@@ -162,6 +162,67 @@
     padding: 10px;
     background: #FFF;
   }
+    /*=================================== CURSOS E DISCIPLINAS ================================*/
+#box_curso_e_disciplinas {
+  width: 978px;
+  background: #E1E1C4;
+  height: auto;
+  float: left;
+  text-align: left;
+  margin: -20px 0 20px 470px;
+  border: 1px solid #333;
+}
+
+#box_curso_e_disciplinas .a2 {
+  font: 12px Arial, Helvetica, sans-serif;
+  margin: 30px 0 10px 37px;
+  color: #FFF;
+  background: #090;
+  text-decoration: none;
+  padding: 10px;
+  border: 1px solid #000;
+}
+
+#box_curso_e_disciplinas .a2:hover {
+  border: 1px solid #0FF;
+  background: #030;
+}
+
+#box_curso_e_disciplinas h1 {
+  font: 20px Arial, Helvetica, sans-serif;
+  margin: 15px 0 10px 37px;
+  color: #000;
+}
+
+#box_curso_e_disciplinas h2 {
+  font: 15px Arial, Helvetica, sans-serif;
+  margin: 2px 0 0 37px;
+  color: #900;
+}
+
+#box_curso_e_disciplinas table {
+  border: 1px solid #333;
+  padding: 10px;
+  background: #FFF;
+  margin: 0 0 10px 0;
+  margin: auto;
+  font: 15px Arial, Helvetica, sans-serif;
+  text-align: left;
+}
+
+#box_curso_e_disciplinas h3 {
+  font: 12px Arial, Helvetica, sans-serif;
+  margin: 2px 0 0 0;
+  color: #900;
+}
+
+#box_curso_e_disciplinas textarea {
+  width: 900px;
+  padding: 5px;
+  height: 80px;
+  color: #F60;
+  font: 15px Arial, Helvetica, sans-serif;
+}
   /*=================================== APLICANDO RESPONSIVIDADE ================================*/
   @media (max-width: 1370px) {
     #box_turma {
@@ -170,5 +231,15 @@
   
     #cadastra_turma {
       margin: -20px 0 20px 185px;
+    }
+
+    #box_curso_e_disciplinas {
+      width: 978px;
+      background: #E1E1C4;
+      height: auto;
+      float: left;
+      text-align: left;
+      margin: -20px 0 20px 185px;
+      border: 1px solid #333;
     }
   }

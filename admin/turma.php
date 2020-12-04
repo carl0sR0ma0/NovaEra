@@ -224,9 +224,39 @@
   <!-- MOSTRAR OS CURSOS E AS DISCIPLINAS -->
   <?php if (@$_GET['pg'] == 'listaralunosturma') { ?>
     <!-- Fazer a lógica do mostrar cursos e as disciplinas -->
-    <a class="a2" href="aluno.php?pg=cadastra&bloco=1">Adicionar Aluno</a>
+    
+    <div id="box_curso_e_disciplinas">
+      <h1>Turmas e Aluno</h1>
+      <?php
+        $sql_tea = "SELECT * FROM turma";
+        $result_tea = mysqli_query($conexao, $sql_tea);
+        if (mysqli_num_rows($result_tea) == '')
+          echo "Não existe nenhuma Turma cadastrada no momento!!!";
+        else { ?>
+      <table width="620" border="0">
+        <?php while ($res_tea = mysqli_fetch_assoc($result_tea)) { ?>
+          <tr>
+            <td width="614">Turma: <?php echo $turma = $res_tea['descricao']; echo " - Curso: ";  echo $res_tea['id_curso']; $idTurma = $res_tea['id']; ?></td>
+          </tr>
+          <tr>
+            <td>
+              <textarea name="textarea" id="textarea" cols="100" rows="5" disabled="disabled">
+                <?php
+                  $sql_tea_aluno = "SELECT * FROM aluno WHERE id_turma = '$idTurma'";
+                  $result_tea_aluno = mysqli_query($conexao, $sql_tea_aluno);
+                  while ($rs_tea2 = mysqli_fetch_assoc($result_tea_aluno)) {
+                    echo $rs_tea2['nome'];
+                  }
+                ?>
+              </textarea>
+            </td>
+          </tr>
+        <?php } ?>
+      </table>  
+      <br>
+      <?php } ?>
+    </div>
   <?php } ?>
-
   <?php require "footer.php"; ?>
 </body>
 </html>

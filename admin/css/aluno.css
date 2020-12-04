@@ -162,13 +162,13 @@
     padding: 10px;
     background: #FFF;
   }
-  /*=================================== APLICANDO RESPONSIVIDADE ================================*/
-  @media (max-width: 1370px) {
-    #box_aluno {
-      margin: -20px 0 20px 193px;    
-    }
-  
-    #cadastra_aluno {
-      margin: -20px 0 20px 185px;
-    }
+/*=================================== APLICANDO RESPONSIVIDADE ================================*/
+@media (max-width: 1370px) {
+  #box_aluno {
+    margin: -20px 0 20px 193px;    
   }
+
+  #cadastra_aluno {
+    margin: -20px 0 20px 185px;
+  }
+}
