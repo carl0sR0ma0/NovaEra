@@ -47,7 +47,7 @@
                     }
                   } else ?>
                   <a href="turma.php?pg=todos&func=turma_disc&id=<?php echo $res_1['id']; ?>"><img src="img/plus.png" title="Adicionar Disciplina" border="0"></a>
-                  <a href="cursos_e_disciplinas.php?pg=disciplina&func=disciplina_profrem&id=<?php echo $res_busca['id']; ?>"><img src="img/menos.png" title="Excluir Professor" border="0"></a>
+                  <a href="turma.php?pg=todos&func=turma_discrem&id=<?php echo $res_1['id']; ?>"><img src="img/menos.png" title="Excluir Professor" border="0"></a>
               </h3></td>
               <td>
                 <a class="a" href="turma.php?pg=todos&func=deleta&id=<?php echo $res_1['id']; ?>"><img src="img/deleta.jpg" title="Excluir Turma(a)" width="18" height="20" border="0"></a>
@@ -120,6 +120,49 @@
                     </tr>
                     <tr>
                       <td><input type="submit" name="button" class="input" value="Adicionar"></td>
+                    </tr>
+                  </table>
+              </form>
+              <br>
+          <?php } ?>
+          <!-- FUNCAO REMOVER DISCIPLINA Á TURMA-->
+          <?php if (@$_GET['func'] == 'turma_discrem') { ?>
+            <hr>
+            <h1>Remover Disciplina á Turma</h1>
+
+            <?php
+              if (isset($_POST['button'])) {
+                $id = $_GET['id'];
+                $idDisciplina = $_POST['disciplina'];
+                $sql_cad_prof_disc = "DELETE FROM disciplina_turma WHERE id_disciplina = '$idDisciplina' AND id_turma = '$id'";
+                $cad_disc_prof = mysqli_query($conexao, $sql_cad_prof_disc);
+
+                if ($cad_disc_prof == '')
+                  echo "<script language='javascript'>window.alert('Ocorreu um erro tente novamente!');window.location='';</script>";
+                else
+                  echo "<script language='javascript'>window.alert('Remoção realizada com sucesso!');window.location='turma.php?pg=todos';</script>";
+              }
+            ?>
+            <form action="" method="post" name="form1" enctype="multipart/form-data">
+                  <table width="900" border="0">
+                    <tr>
+                      <td>Selecione a Disciplina:</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <select name="disciplina">
+                        <?php
+                          $sql_result_prof = "SELECT * FROM disciplina WHERE nome != ''";
+                          $result_rec_prof = mysqli_query($conexao, $sql_result_prof);
+
+                          while ($r3 = mysqli_fetch_assoc($result_rec_prof)) { ?>
+                            <option value="<?php echo $r3['id']; ?>"><?php echo $r3['nome']; ?></option>
+                          <?php } ?>
+                        </select>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><input type="submit" name="button" class="input" value="Remover"></td>
                     </tr>
                   </table>
               </form>
