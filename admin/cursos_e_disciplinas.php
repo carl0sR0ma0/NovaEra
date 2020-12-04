@@ -443,27 +443,65 @@
           echo "Não existe nenhum Curso cadastrado no momento !";
         else { ?>
         <table width="620" border="0"> 
-          <?php while ($rs_ced = mysqli_fetch_assoc($result_ced)) { ?>
+          <?php while ($rs_cet = mysqli_fetch_assoc($result_ced)) { ?>
             <tr>
-              <td width="614">Curso: <?php echo $curso = $rs_ced['nome']; $idCurs = $rs_ced['id']; ?></td>
+              <td width="614">Curso: <?php echo $curso = $rs_cet['nome']; $idCurs = $rs_cet['id']; ?></td>
             </tr>
             <tr>
               <td>
                 <textarea name="textarea" id="textarea" cols="100" rows="5" disabled="disabled">
                   <?php
-                    $sql_ced_prof = "SELECT * FROM disciplina WHERE id_curso = '$idCurs'";
+                    $sql_cet_prof = "SELECT * FROM disciplina WHERE id_curso = '$idCurs'";
                     
-                    $result_ced_prof = mysqli_query($conexao, $sql_ced_prof);
-                    while ($rs_ced2 = mysqli_fetch_assoc($result_ced_prof)) {
-                      $disciplina = $rs_ced2['id'];
+                    $result_cet_prof = mysqli_query($conexao, $sql_cet_prof);
+                    while ($rs_cet2 = mysqli_fetch_assoc($result_cet_prof)) {
+                      $disciplina = $rs_cet2['id'];
                       echo "\n";
-                      echo $rs_ced2['nome'];
+                      echo $rs_cet2['nome'];
                     }
                   ?>
                 </textarea>
               </td>
             </tr>
           <?php } ?>
+        </table>
+        <br>
+        <?php } ?>
+    </div>
+  <?php } ?>
+
+  <!-- MOSTRAR OS CURSOS E AS TURMAS -->
+  <?php if (@$_GET['pg'] == 'cursoeturmas') { ?>
+    <div id="box_curso_e_disciplinas">
+      <h1>Cursos e Turmas</h1>
+      <?php
+        $sql_cet = "SELECT * FROM curso";
+        $result_cet = mysqli_query($conexao, $sql_cet);
+        if (mysqli_num_rows($result_cet) == '')
+          echo "Não existe nenhum Curso cadastrado no momento !";
+        else { ?>
+        <table width="620" border="0"> 
+          <?php while ($rs_cet = mysqli_fetch_assoc($result_cet)) { ?>
+            <tr>
+              <td width="614">Curso: <?php echo $curso = $rs_cet['nome']; $idCurs = $rs_cet['id']; ?></td>
+            </tr>
+            <tr>
+              <td>
+                <textarea name="textarea" id="textarea" cols="100" rows="5" disabled="disabled">
+                  <?php
+                    $sql_cet_prof = "SELECT * FROM turma WHERE id_curso = '$idCurs'";
+                    
+                    $result_cet_prof = mysqli_query($conexao, $sql_cet_prof);
+                    while ($rs_cet2 = mysqli_fetch_assoc($result_cet_prof)) {
+                      $disciplina = $rs_cet2['id'];
+                      echo "\n";
+                      echo $rs_cet2['descricao'];
+                    }
+                  ?>
+                </textarea>
+              </td>
+            </tr>
+            <?php } ?>
         </table>
         <br>
         <?php } ?>

@@ -78,7 +78,8 @@
               if (isset($_POST['button'])) {
                 $id = $_GET['id'];
                 $idDisciplina = $_POST['disciplina'];
-                $sql_cad_disc_turma = "INSERT INTO disciplina_turma (id_disciplina, id_turma) VALUES ('$idDisciplina', '$id')";
+                $professor = $_POST['professor'];
+                $sql_cad_disc_turma = "INSERT INTO disciplina_turma (id_disciplina, id_turma, id_professor) VALUES ('$idDisciplina', '$id', '$professor')";
                 $cad_disc_turma = mysqli_query($conexao, $sql_cad_disc_turma);
 
                 if ($cad_disc_turma == '')
@@ -91,6 +92,7 @@
                   <table width="900" border="0">
                     <tr>
                       <td>Selecione a Disciplina:</td>
+                      <td>Selecione o Professor:</td>
                     </tr>
                     <tr>
                       <td>
@@ -101,6 +103,17 @@
 
                           while ($r3 = mysqli_fetch_assoc($result_rec_disc)) { ?>
                             <option value="<?php echo $r3['id']; ?>"><?php echo $r3['nome']; ?></option>
+                          <?php } ?>
+                        </select>
+                      </td>
+                      <td>
+                        <select name="professor">
+                        <?php
+                          $sql_result_prof = "SELECT * FROM professor WHERE nome != ''";
+                          $result_rec_prof = mysqli_query($conexao, $sql_result_prof);
+
+                          while ($r4 = mysqli_fetch_assoc($result_rec_prof)) { ?>
+                            <option value="<?php echo $r4['id']; ?>"><?php echo $r4['nome']; ?></option>
                           <?php } ?>
                         </select>
                       </td>
@@ -121,8 +134,9 @@
           if (isset($_POST['button'])) {
             $id = $_POST['id'];
             $turma = $_POST['descricao'];
+            $curso = $_POST['curso'];
               
-            $sql_2 = "INSERT INTO turma (id, descricao) VALUES ('$id', '$turma')";
+            $sql_2 = "INSERT INTO turma (id, descricao, id_curso) VALUES ('$id', '$turma', '$curso')";
             $cadastra = mysqli_query($conexao, $sql_2);
   
             echo "<script language='javascript'>window.alert('Turma cadastrada com sucesso!');window.location='turma.php?pg=todos';</script>";
@@ -132,7 +146,8 @@
           <table width="900" border="0">
             <tr>
               <td>ID:</td>
-              <td>Descrição:</td>             
+              <td>Descrição:</td>   
+              <td>Curso:</td>          
             </tr>
             <tr>
               <td>
@@ -140,6 +155,16 @@
               </td>
               <td>
                 <input type="text" name="descricao" id="textfield2">
+              </td>
+              <td>
+                <select style="width:200px;" size="1" name="curso">
+                  <?php
+                    $sql_rec_curso = "SELECT * FROM curso";
+                    $result_rec_curso = mysqli_query($conexao, $sql_rec_curso);
+                    while ($r2 = mysqli_fetch_assoc($result_rec_curso)) { ?>
+                      <option value="<?php echo $r2['id']; ?>"><?php echo $r2['nome']; ?></option>
+                    <?php } ?>
+                </select>
               </td>
             </tr>
             <tr>

@@ -35,13 +35,15 @@
     <div id="menu_topo">
       <ul>
         <img src="img/separador_menu.png" />
-        <li><a href="">CURSOS E DISCIPLINAS</a>
+        <li><a href="">CURSOS</a>
           <ul>
             <li><a href="cursos_e_disciplinas.php?pg=curso">Cadastrar Curso</a></li>
-            <li><a href="cursos_e_disciplinas.php?pg=disciplina">Cadastrar Disciplina</a></li>
             <li><a href="cursos_e_disciplinas.php?pg=cursoedisciplinas">Cursos & Disciplinas</a></li>
+            <li><a href="cursos_e_disciplinas.php?pg=cursoeturmas">Cursos & Turmas</a></li>
           </ul>
         </li>
+        <img src="img/separador_menu.png" />
+        <li><a href="cursos_e_disciplinas.php?pg=disciplina">DISCIPLINAS</a></li>
         <img src="img/separador_menu.png" />
         <li><a href="turma.php?pg=todos">TURMAS</a>
           <ul>
